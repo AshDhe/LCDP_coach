@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Espace coach - La Clé du Parc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Redirection vers la connexion coach La Clé du Parc.">
+  <script src="./config.js"></script>
+  <script>
+    (() => {
+      "use strict";
+      const config = window.SITE_CONFIG || {};
+      const chemin = "/ESPACE-COACH/connexion-coach.html";
+      const destination = typeof config.coachUrl === "function"
+        ? config.coachUrl(chemin)
+        : String(config.coachBaseUrl || config.COACH_BASE || config.siteBase || window.location.origin).replace(/\/+$/, "") + chemin;
+      window.location.replace(destination);
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirection vers la connexion coach…</p>
+  <p><a href="./ESPACE-COACH/connexion-coach.html">Accéder à la connexion</a></p>
+</body>
+</html>
