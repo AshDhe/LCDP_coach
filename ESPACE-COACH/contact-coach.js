@@ -72,7 +72,7 @@
     "label": "Envoyer ma demande",
     "style": "lcdp-button-secondary"
   },
-  "introHtml": `<div class="lcdp-box-formulaire__note">Cette demande ne crée pas de compte coach. Notre équipe vous recontacte pour étudier votre demande.</div>
+  "introHtml": `<div class="lcdp-box-formulaire__note">Cette demande ne crée pas de compte COACH. Notre équipe vous recontacte pour étudier votre demande.</div>
     <section class="lcdp-boxtext__content" aria-labelledby="contact-coach-compte-title">
       <h2 id="contact-coach-compte-title" class="lcdp-text-strong-left">Le compte COACH La Clé du Parc</h2>
       <ul>
