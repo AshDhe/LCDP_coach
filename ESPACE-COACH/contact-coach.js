@@ -11,6 +11,7 @@
       "id": "nomcoach",
       "name": "nomcoach",
       "label": "NOM",
+      "placeholder": "NOM",
       "required": true,
       "validationNative": true,
       "maxlength": 120,
@@ -21,6 +22,7 @@
       "id": "prenomcoach",
       "name": "prenomcoach",
       "label": "Prénom",
+      "placeholder": "Prénom",
       "required": true,
       "validationNative": true,
       "maxlength": 120,
@@ -31,6 +33,7 @@
       "id": "emailcoach",
       "name": "emailcoach",
       "label": "Adresse mail",
+      "placeholder": "Adresse mail",
       "required": true,
       "validationNative": true,
       "maxlength": 254,
@@ -41,6 +44,7 @@
       "id": "telcoach",
       "name": "telcoach",
       "label": "Ligne directe",
+      "placeholder": "Ligne directe",
       "required": true,
       "validationNative": true,
       "maxlength": 120,
@@ -51,6 +55,7 @@
       "id": "metiercoach",
       "name": "metiercoach",
       "label": "Activité(s)",
+      "placeholder": "Activité(s)",
       "required": true,
       "validationNative": true,
       "maxlength": 240
@@ -60,11 +65,11 @@
       "id": "dptmtcoach",
       "name": "dptmtcoach",
       "label": "Département de référence",
+      "placeholder": "Département - Exemple : 08",
       "required": true,
       "validationNative": true,
       "maxlength": 3,
-      "inputmode": "text",
-      "placeholder": "Exemple 08"
+      "inputmode": "text"
     }
   ],
   "bouton": {
@@ -83,6 +88,17 @@
 };
  window.LCDP_initialiserContactCoach = async function() {
   const form=await window.LCDP_creerFormulaire("formulaire-coach-slot",configuration);
+  configuration.champs.forEach((champ, index) => {
+    const controle = form.elements.namedItem(champ.name);
+    controle.setAttribute("aria-label", champ.label);
+    const zone = controle.closest(".lcdp-box-champ-formulaire").querySelector(".lcdp-box-champ-formulaire__label-zone");
+    if (index === 0) {
+      zone.querySelector("label").textContent = "Information de contact";
+    } else {
+      zone.hidden = true;
+    }
+  });
+  document.dispatchEvent(new CustomEvent("lcdp:contact-formulaire-pret", {detail: {type: "coach"}}));
   const endpoint=window.SITE_CONFIG?.workerContactCoachUrl || "https://lacleduparc.fr/api/contact-coach";
   await window.LCDP_brancherFormulaireProtege(form,{type:"coach",endpoint,champs:configuration.champs});
  };
