@@ -72,7 +72,14 @@
     "label": "Envoyer ma demande",
     "style": "lcdp-button-secondary"
   },
-  "noteHtml": "Cette demande ne crée pas d’accès à l’espace privé. Notre équipe vous recontacte pour étudier votre inscription."
+  "introHtml": `<div class="lcdp-box-formulaire__note">Cette demande ne crée pas de compte coach. Notre équipe vous recontacte pour étudier votre demande.</div>
+    <section class="lcdp-boxtext__content" aria-labelledby="contact-coach-compte-title">
+      <h2 id="contact-coach-compte-title" class="lcdp-text-strong-left">Le compte COACH La Clé du Parc</h2>
+      <ul>
+        <li>Présentez votre activité et votre territoire de référence (département).</li>
+        <li>Organisez pour vos clients des moments d'exception dans le réseau des parcs.</li>
+      </ul>
+    </section>`
 };
  window.LCDP_initialiserContactCoach = async function() {
   const form=await window.LCDP_creerFormulaire("formulaire-coach-slot",configuration);
