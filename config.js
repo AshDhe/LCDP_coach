@@ -49,6 +49,8 @@
 
     workerContactCoachUrl: workerContact,
     WORKER_CONTACT_COACH_URL: workerContact,
+    workerConnexionCoachUrl: "https://connexion-coach-api.lacleduparc.fr",
+    WORKER_CONNEXION_COACH_URL: "https://connexion-coach-api.lacleduparc.fr",
     workerUserRouteurUrl: "https://user-routeur-api.lacleduparc.fr",
     WORKER_USER_ROUTEUR_URL: "https://user-routeur-api.lacleduparc.fr",
 
