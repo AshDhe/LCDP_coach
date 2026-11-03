@@ -86,12 +86,12 @@
     const boutons = [
       {label:"Planifier",classe:"orange"},
       {label:"Mes accès",classe:"green"},
-      {label:"Ma Clé",classe:"blue"}
+      {label:"Ma Clé",classe:"coach"}
     ];
     boutons.forEach((item,index) => {
       const b=document.createElement("button");
       b.type="button";
-      b.className="lcdp-button lcdp-button-accueil lcdp-button-accueil-"+item.classe+" lcdp-accueil-picto";
+      b.className="lcdp-button lcdp-button-accueil "+(item.classe==="coach"?"lcdp-button-accueil-coach":"lcdp-button-accueil-"+item.classe)+" lcdp-accueil-picto";
       b.innerHTML=PICTOGRAMMES_ACCUEIL[index];
       const t=document.createElement("span");
       t.textContent=item.label;
@@ -99,10 +99,11 @@
       b.addEventListener("click",async()=>{
         if(actionAccueilEnCours)return;
         actionAccueilEnCours=true;
-        // Cette action COACH est encore informative : aucune navigation à attendre.
+        b.disabled=true;
+        // Une action informative ne doit pas être recouverte par un écran de navigation.
         try { await ouvrirAlerte("La fonction « "+item.label+" » sera raccordée lors du développement de l’espace COACH."); }
         catch(error) { console.error(error); }
-        finally { masquerAttenteNavigation(); }
+        finally { actionAccueilEnCours=false; b.disabled=false; }
       });
       liste.appendChild(b);
     });
