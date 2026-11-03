@@ -66,10 +66,12 @@
     const nav = slot.querySelector(".lcdp-box-bandeau-nav");
     if (nav) nav.style.backgroundColor = "var(--lcdp-color-coach)";
     const logo = slot.querySelector(".lcdp-box-bandeau-nav__logo");
+    // Le bandeau conserve le logo MEMBRE ; même repli visuel que l'accueil PARC.
     if (logo) logo.addEventListener("error", () => {
-      console.error("Logo officiel COACH introuvable :", logo.currentSrc || logo.src);
+      const secours = publicUrl("/favicon-32x32.png");
+      if (logo.src !== secours) logo.src = secours;
     }, { once: true });
-    await scriptUnique(espace("/ESPACE-COACH/box-menu-burger-coach.js"));
+    await scriptUnique(espace("/ESPACE-COACH/box-menu-burger-coach.js") + "?v=20261103-menu-parc-iso-v1");
     if (typeof window.LCDP_initialiserMenuBurgerCoach !== "function") throw new Error("Burger COACH indisponible.");
     await window.LCDP_initialiserMenuBurgerCoach({ endpoint, urlEspace: espace, urlPublic: publicUrl, urlObjet: objet, ouvrirAlerte: alerte, redirection: rediriger });
   }

@@ -5,16 +5,13 @@
     const t=document.createElement("template");t.innerHTML=(await r.text()).trim();slot.replaceChildren(t.content.cloneNode(true));
     const bouton=slot.querySelector("[data-lcdp-burger-button]"),nav=slot.querySelector("[data-lcdp-burger-nav]"),liste=slot.querySelector("[data-lcdp-burger-list]");
     if(!bouton||!nav||!liste)throw Error("Menu burger incomplet.");nav.hidden=true;const fermer=()=>{nav.hidden=true;bouton.setAttribute("aria-expanded","false");};
-    // Ordre des entrées publiques identique à celui du menu membre,
-    // sans créer de routes COACH non établies.
+    // Même ordre et mêmes libellés que le burger PARC ; accueil propre à COACH.
     const choix=[
-      ["Accueil La Clé du Parc",ctx.urlEspace("/ESPACE-COACH/accueil-coach.html")],
+      ["Accueil",ctx.urlEspace("/ESPACE-COACH/accueil-coach.html")],
+      ["Déconnexion",null],
       ["Mon compte",null],
-      ["Actualité",ctx.urlPublic("/ESPACE-PUBLIC/actualite.html")],
-      ["L’association",ctx.urlPublic("/ESPACE-PUBLIC/association.html")],
-      ["FAQ",ctx.urlPublic("/ESPACE-PUBLIC/FAQ-public.html")],
-      ["Changer d'espace connecté",null],
-      ["Déconnexion",null]
+      ["Actualité La Clé du Parc",ctx.urlPublic("/ESPACE-PUBLIC/actualite.html")],
+      ["Changer d’espace connecté",null]
     ];
 
     async function changerEspace(){
@@ -60,7 +57,7 @@
         actions.append(b);
       }
     }
-    for(const [libelle,lien]of choix){const el=document.createElement(lien?"a":"button");el.className=lien?"lcdp-box-menu-burger__link":"lcdp-box-menu-burger__button-link";el.textContent=libelle;if(lien)el.href=lien;else{el.type="button";el.addEventListener("click",async()=>{fermer();if(libelle==="Mon compte"){await ctx.ouvrirAlerte("La page Mon compte de l’espace COACH sera créée prochainement.");return;}if(libelle==="Changer d'espace connecté"){await changerEspace();return;}if(libelle==="Déconnexion"){try{const r=await fetch(ctx.endpoint+"/logout",{method:"POST",credentials:"include",cache:"no-store"});const d=await r.json().catch(()=>null);if(!r.ok||d?.success!==true)throw Error();window.location.href=ctx.urlPublic("/ESPACE-PUBLIC/accueil-public.html");}catch{await ctx.ouvrirAlerte("La déconnexion n’a pas pu être confirmée.");}}});}liste.append(el);}
+    for(const [libelle,lien]of choix){const el=document.createElement(lien?"a":"button");el.className=lien?"lcdp-box-menu-burger__link":"lcdp-box-menu-burger__button-link";el.textContent=libelle;if(lien)el.href=lien;else{el.type="button";el.addEventListener("click",async()=>{fermer();if(libelle==="Mon compte"){await ctx.ouvrirAlerte("La page Mon compte de l’espace COACH sera créée prochainement.");return;}if(libelle==="Changer d’espace connecté"){await changerEspace();return;}if(libelle==="Déconnexion"){try{const r=await fetch(ctx.endpoint+"/logout",{method:"POST",credentials:"include",cache:"no-store"});const d=await r.json().catch(()=>null);if(!r.ok||d?.success!==true)throw Error();window.location.href=ctx.urlPublic("/ESPACE-PUBLIC/accueil-public.html");}catch{await ctx.ouvrirAlerte("La déconnexion n’a pas pu être confirmée.");}}});}liste.append(el);}
     bouton.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();nav.hidden=!nav.hidden;bouton.setAttribute("aria-expanded",String(!nav.hidden));});
     nav.addEventListener("click",e=>e.stopPropagation());document.addEventListener("click",e=>{if(!slot.contains(e.target))fermer();});document.addEventListener("keydown",e=>{if(e.key==="Escape")fermer();});
   };
