@@ -96,7 +96,121 @@
       });
     })();
   </script>
-  </head>
+  <style>
+    #lcdp-accueil-contenu[hidden], #lcdp-accueil-erreur[hidden] { display: none !important; }
+    /* Attente initiale : couvre la fenêtre dès le premier affichage. */
+    #lcdp-accueil-attente {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 10000;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      margin: 0 !important;
+      padding: 0 !important;
+      align-items: center;
+      justify-content: center;
+      background: var(--lcdp-color-surface, #fff);
+    }
+    #lcdp-accueil-attente > img {
+      display: block;
+      flex: 0 0 64px;
+      width: 64px;
+      height: 64px;
+      margin: 0;
+    }
+
+    /* Attente de navigation : superposition centrée, sans déplacer les boutons. */
+    #lcdp-navigation-attente:not([hidden]) {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 16px;
+      box-sizing: border-box;
+      background: var(--lcdp-color-surface, #fff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* L'indicateur est toujours au centre du viewport, pas du contenu de page. */
+    #lcdp-navigation-attente .lcdp-pictowait__image {
+      position: fixed !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      margin: 0 !important;
+      max-width: none;
+    }
+    #lcdp-navigation-attente[hidden] {
+      display: none !important;
+    }
+  </style>
+  <style id="lcdp-pictos-accueil-coach">
+    .lcdp-page-accueil-coach #lcdp-menu-central-slot,
+    .lcdp-page-accueil-coach #lcdp-menu-central-slot > *,
+    .lcdp-page-accueil-coach #lcdp-menu-central-slot .lcdp-accueil-actions {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-accueil-picto {
+      box-sizing: border-box;
+      width: 148.68px;
+      max-width: 100%;
+      flex-shrink: 0;
+      height: 112px;
+      min-height: 112px;
+      margin-inline: auto;
+      padding: 8px 16px;
+      flex-direction: column;
+      gap: 4px;
+      color: #ffffff;
+    }
+    .lcdp-accueil-picto > svg,
+    .lcdp-accueil-picto > img {
+      display: block;
+      max-width: none;
+      min-width: 71.68px;
+      width: 71.68px;
+      height: 71.68px;
+      flex: 0 0 71.68px;
+      object-fit: contain;
+    }
+    .lcdp-accueil-picto > img {
+      filter: brightness(0) invert(1);
+      transform: scale(1.15);
+    }
+    .lcdp-accueil-picto > span {
+      font-size: clamp(11.95488px, 3.6064vw, 16.4864px);
+      transform: scaleX(0.95);
+      line-height: 1.05;
+      white-space: nowrap;
+    }
+    @media (min-width: 768px) {
+      .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-accueil-picto {
+        width: 194.88px;
+        height: 120px;
+        min-height: 120px;
+      }
+      .lcdp-accueil-picto > svg,
+      .lcdp-accueil-picto > img {
+        min-width: 76.16px;
+        width: 76.16px;
+        height: 76.16px;
+        flex-basis: 76.16px;
+      }
+      .lcdp-accueil-picto > span {
+        font-size: 15.088px;
+      }
+    }
+  </style>
+</head>
 
 <body class="lcdp-page-accueil-coach">
   <div id="lcdp-accueil-attente" role="status" aria-label="Chargement de votre espace coach" style="display:flex">
@@ -150,6 +264,7 @@
       document.getElementById("lcdp-accueil-erreur").hidden = false;
     };
   </script>
-  <script src="./accueil-coach.js?v=20261103-parite-membre" onerror="window.LCDP_echecAccueilCoach()"></script>
+  <script src="./accueil-coach.js?v=20261103-parite-visuelle-v2" onerror="window.LCDP_echecAccueilCoach()"></script>
+  <script>document.write('<script defer src="' + window.LCDP_urlPublic('/ESPACE-PUBLIC/actualite.js') + '"><\/script>');</script>
 </body>
 </html>
