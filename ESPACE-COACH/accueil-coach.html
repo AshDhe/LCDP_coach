@@ -5,6 +5,7 @@
 
   <title>Accueil espace COACH - La Clé du Parc</title>
 
+  <link rel="icon" type="image/png" href="../favicon-32x32.png">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Accueil de votre espace COACH La Clé du Parc.">
 
@@ -44,8 +45,8 @@
       );
 
       window.SITE_BASE = nettoyerBaseUrl(config.coachBaseUrl || config.COACH_BASE || config.siteBase || "");
+      window.LCDP_ESPACE_BASE = window.SITE_BASE;
       window.LCDP_MEMBRE_BASE = membreBase;
-      window.LCDP_ESPACE_BASE = nettoyerBaseUrl(config.coachBaseUrl || config.COACH_BASE || config.siteBase || "");
       window.LCDP_PUBLIC_BASE = publicBase;
       window.LCDP_OBJET_BASE = objetBase;
 
@@ -81,8 +82,6 @@
         "/BOX/02-box-menu-burger.css",
         "/BOX/02-box-alerte.css",
         "/BOX/02-box-dialogue-bouton.css",
-        "/BOX/02-box-menu-bouton.css",
-        "/BOX/04-box-card-abonnement.css",
         "/BOX/02-box-footer.css",
         "/BOX/pictowait.css"
       ];
@@ -96,6 +95,8 @@
       });
     })();
   </script>
+
+  <!-- Règles existantes copiées sans modification depuis accueil-membre.html : attente et pictogrammes. -->
   <style>
     #lcdp-accueil-contenu[hidden], #lcdp-accueil-erreur[hidden] { display: none !important; }
     /* Attente initiale : couvre la fenêtre dès le premier affichage. */
@@ -151,15 +152,15 @@
       display: none !important;
     }
   </style>
-  <style id="lcdp-pictos-accueil-coach">
-    .lcdp-page-accueil-coach #lcdp-menu-central-slot,
-    .lcdp-page-accueil-coach #lcdp-menu-central-slot > *,
-    .lcdp-page-accueil-coach #lcdp-menu-central-slot .lcdp-accueil-actions {
+  <style id="lcdp-pictos-accueil-membre">
+    .lcdp-page-accueil-membre #lcdp-menu-central-slot,
+    .lcdp-page-accueil-membre #lcdp-menu-central-slot > *,
+    .lcdp-page-accueil-membre #lcdp-menu-central-slot .lcdp-accueil-actions {
       width: 100%;
       min-width: 0;
     }
 
-    .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-accueil-picto {
+    .lcdp-page-accueil-membre .lcdp-accueil-actions > button.lcdp-accueil-picto {
       box-sizing: border-box;
       width: 148.68px;
       max-width: 100%;
@@ -193,7 +194,7 @@
       white-space: nowrap;
     }
     @media (min-width: 768px) {
-      .lcdp-page-accueil-coach .lcdp-accueil-actions > button.lcdp-accueil-picto {
+      .lcdp-page-accueil-membre .lcdp-accueil-actions > button.lcdp-accueil-picto {
         width: 194.88px;
         height: 120px;
         min-height: 120px;
@@ -212,8 +213,8 @@
   </style>
 </head>
 
-<body class="lcdp-page-accueil-coach">
-  <div id="lcdp-accueil-attente" role="status" aria-label="Chargement de votre espace coach" style="display:flex">
+<body class="lcdp-page-accueil-membre lcdp-page-accueil-coach">
+  <div id="lcdp-accueil-attente" role="status" aria-label="Chargement de votre espace COACH" style="display:flex">
             <script>document.write('<img src="' + window.LCDP_urlObjet('/BOX/pictowait.gif') + '" alt="" width="64" height="64">');</script>
           </div>
   <div class="lcdp-site-page">
@@ -226,10 +227,10 @@
         <div class="lcdp-page-container">
 
           <div id="lcdp-accueil-erreur" hidden role="alert">
-            <p>Impossible de charger votre espace coach.</p>
+            <p>Impossible de charger votre espace COACH.</p>
             <button type="button" class="lcdp-button lcdp-button-primary" onclick="window.location.reload()">Réessayer</button>
           </div>
-          <noscript>Activez JavaScript pour accéder à votre espace coach.</noscript>
+          <noscript>Activez JavaScript pour accéder à votre espace COACH.</noscript>
           <div id="lcdp-accueil-contenu" class="lcdp-page-content lcdp-stack-large" hidden aria-busy="true">
 
             <div class="lcdp-accueil-intro">
@@ -237,7 +238,7 @@
                 Bonjour, c’est à vous.
               </p>
 
-              <p class="lcdp-mention-connexion" id="mention-statut-coach" aria-live="polite">
+              <p class="lcdp-mention-connexion" id="mention-statut-membre" aria-live="polite">
                 
               </p>
             </div>
@@ -264,7 +265,6 @@
       document.getElementById("lcdp-accueil-erreur").hidden = false;
     };
   </script>
-  <script src="./accueil-coach.js?v=20261103-parite-visuelle-v2" onerror="window.LCDP_echecAccueilCoach()"></script>
-  <script>document.write('<script defer src="' + window.LCDP_urlPublic('/ESPACE-PUBLIC/actualite.js') + '"><\/script>');</script>
+  <script src="./accueil-coach.js?v=20261103-coach-iso-membre-v2" onerror="window.LCDP_echecAccueilCoach()"></script>
 </body>
 </html>
