@@ -1,7 +1,7 @@
 (() => {"use strict";
   window.LCDP_initialiserMenuBurgerCoach=async function(ctx){
     const slot=document.querySelector("[data-lcdp-burger-slot]");if(!slot)return;
-    const r=await fetch(ctx.urlObjet("/BOX/02-box-menu-burger.html"),{credentials:"omit",cache:"no-cache"});if(!r.ok)throw Error("Menu burger indisponible.");
+    const r=await fetch(ctx.urlObjet("/HTMLBASE/02-menu-burger.html"),{credentials:"omit",cache:"no-cache"});if(!r.ok)throw Error("Menu burger indisponible.");
     const t=document.createElement("template");t.innerHTML=(await r.text()).trim();slot.replaceChildren(t.content.cloneNode(true));
     const bouton=slot.querySelector("[data-lcdp-burger-button]"),nav=slot.querySelector("[data-lcdp-burger-nav]"),liste=slot.querySelector("[data-lcdp-burger-list]");
     if(!bouton||!nav||!liste)throw Error("Menu burger incomplet.");nav.hidden=true;const fermer=()=>{nav.hidden=true;bouton.setAttribute("aria-expanded","false");};
@@ -21,7 +21,7 @@
         {compte:"parc",label:"Espace PARC",connexion:"/ESPACE-PUBLIC/connexion-parc.html?source=menu-mon-compte"},
         {compte:"coach",label:"Espace COACH",connexion:"/ESPACE-PUBLIC/connexion-coach.html?source=menu-mon-compte"}
       ];
-      const fragment=await fetch(ctx.urlObjet("/BOX/02-box-dialogue-bouton.html"),{credentials:"omit",cache:"no-cache"});
+      const fragment=await fetch(ctx.urlObjet("/HTMLBASE/02-dialogue-bouton.html"),{credentials:"omit",cache:"no-cache"});
       if(!fragment.ok)throw Error("Dialogue de changement de compte indisponible.");
       const slot=document.getElementById("lcdp-lightbox-slot");
       if(!slot)throw Error("Conteneur de dialogue indisponible.");

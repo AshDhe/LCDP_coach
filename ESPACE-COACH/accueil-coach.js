@@ -125,7 +125,7 @@
   }
   async function alerte(message) {
     try {
-      zoneAlerte.replaceChildren(await fragment(objet("/BOX/02-box-alerte.html")));
+      zoneAlerte.replaceChildren(await fragment(objet("/HTMLBASE/02-alerte.html")));
       const texte = zoneAlerte.querySelector("[data-lcdp-alerte-message]");
       const ok = zoneAlerte.querySelector("[data-lcdp-alerte-ok]");
       const close = zoneAlerte.querySelector("[data-lcdp-alerte-close]");
@@ -154,7 +154,7 @@
   }
   async function footer() {
     const slot = document.getElementById("lcdp-footer-slot");
-    slot.replaceChildren(await fragment(objet("/BOX/02-box-footer.html")));
+    slot.replaceChildren(await fragment(objet("/HTMLBASE/02-footer.html")));
     appliquerRoutes(slot);
   }
   function presenterCompte(session) {
@@ -168,7 +168,7 @@
   }
 
   async function afficherMenuCoach() {
-    menu.replaceChildren(await fragment(objet("/BOX/02-box-menu-bouton.html")));
+    menu.replaceChildren(await fragment(objet("/HTMLBASE/02-menu-bouton.html")));
     const liste = menu.querySelector("[data-lcdp-menu-bouton-list]");
     if (!liste) throw new Error("Menu principal incomplet.");
     liste.classList.add("lcdp-accueil-actions");
