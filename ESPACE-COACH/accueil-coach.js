@@ -148,7 +148,7 @@
     // Couleur COACH existante ; ne change pas la palette des boutons.
     const nav = slot.querySelector(".lcdp-box-bandeau-nav");
     if (nav) nav.style.backgroundColor = "var(--lcdp-color-coach)";
-    await scriptUnique(espace("/ESPACE-COACH/box-menu-burger-coach.js?v=20261104-cal-rdv-v1") + "?v=20261103-menu-parc-iso-v1");
+    await scriptUnique(espace("/ESPACE-COACH/box-menu-burger-coach.js") + "");
     if (typeof window.LCDP_initialiserMenuBurgerCoach !== "function") throw new Error("Burger COACH indisponible.");
     await window.LCDP_initialiserMenuBurgerCoach({ endpoint, urlEspace: espace, urlPublic: publicUrl, urlObjet: objet, ouvrirAlerte: alerte, redirection: rediriger });
   }
