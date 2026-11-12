@@ -123,7 +123,32 @@
       el.src = objet(el.dataset.siteSrc.replace(/^\/?OBJET\//, "/"));
     });
   }
-  async function alerte(message) {
+  async function alerte(message, options = {}) {
+    if (options.profil === "information") {
+      try {
+        zoneAlerte.replaceChildren(await fragment(objet("/HTMLBASE/02-dialogue-reference-information.html")));
+        const dialogue = zoneAlerte.querySelector('[data-lcdp-dialogue-reference="information"]');
+        const titre = zoneAlerte.querySelector("[data-lcdp-dialogue-titre]");
+        const texte = zoneAlerte.querySelector("[data-lcdp-dialogue-message]");
+        const bouton = zoneAlerte.querySelector('[data-lcdp-dialogue-action="compris"]');
+        if (!dialogue || !titre || !texte || !bouton) throw new Error("Structure INFORMATION incomplète.");
+        titre.textContent = options.titre || "Information";
+        texte.textContent = message;
+        bouton.textContent = "Fermer";
+        await new Promise(resolve => {
+          bouton.addEventListener("click", () => {
+            zoneAlerte.replaceChildren();
+            resolve();
+          }, { once: true });
+          bouton.focus();
+        });
+      } catch (erreur) {
+        zoneAlerte.replaceChildren();
+        console.warn(erreur);
+        window.alert(message);
+      }
+      return;
+    }
     try {
       zoneAlerte.replaceChildren(await fragment(objet("/HTMLBASE/02-alerte.html")));
       const texte = zoneAlerte.querySelector("[data-lcdp-alerte-message]");
@@ -207,7 +232,7 @@
       const libelle = document.createElement("span");
       libelle.textContent = action.label;
       bouton.append(libelle);
-      bouton.addEventListener("click", () => alerte("La fonction « " + action.label + " » sera raccordée lors du développement de l’espace COACH."));
+      bouton.addEventListener("click", () => alerte("La fonction « " + action.label + " » sera raccordée lors du développement de l’espace COACH.", { profil: "information" }));
       liste.append(bouton);
     });
   }
