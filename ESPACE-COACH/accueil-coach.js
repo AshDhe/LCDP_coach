@@ -136,10 +136,18 @@
         texte.textContent = message;
         bouton.textContent = "Fermer";
         await new Promise(resolve => {
-          bouton.addEventListener("click", () => {
+          let termine = false;
+          const fermer = () => {
+            if (termine) return;
+            termine = true;
+            document.removeEventListener("keydown", clavier);
             zoneAlerte.replaceChildren();
             resolve();
-          }, { once: true });
+          };
+          const clavier = event => { if (event.key === "Escape") { event.preventDefault(); fermer(); } };
+          bouton.addEventListener("click", fermer, { once: true });
+          dialogue.addEventListener("click", event => { if (event.target === dialogue) fermer(); });
+          document.addEventListener("keydown", clavier);
           bouton.focus();
         });
       } catch (erreur) {
