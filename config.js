@@ -72,4 +72,6 @@
     siteUrl(path) { return buildUrl(active.coachBase, path); },
     apiUrl(workerSubdomain) { return "https://" + workerSubdomain + ".lacleduparc.fr"; }
   };
+  // Active uniquement la palette commune CSSBASE ; aucun style de composant local.
+  document.documentElement.dataset.lcdpEspace = window.SITE_CONFIG.espace;
 })();
